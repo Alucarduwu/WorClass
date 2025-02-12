@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WorClass</string>
+    <string name="sample_text">Hello Word From Strings.xml</string>
 </resources>
