@@ -117,7 +117,7 @@ class MainActivity : ComponentActivity() {
         ) {
             TextComposable(name = "A")
             TextComposable(name = "B")
-            TextComposable(name = "C")
+            TextComposable(name = "E")
             TextComposable(name = "D")
 
         }
