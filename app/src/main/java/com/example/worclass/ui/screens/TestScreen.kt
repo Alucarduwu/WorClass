@@ -39,35 +39,27 @@ import com.example.worclass.R
 import com.example.worclass.ui.theme.WorClassTheme
 
 @Composable
-fun TestScreen(navHostController: NavHostController){
+fun TestScreen(navHostController: NavHostController) {
     Column(
         modifier = Modifier
             .padding(2.dp)
             .fillMaxSize()
-    ) {}
-}
+    ) {
+        Text(text = "Test Screen")
 
-
-class MainActivity : ComponentActivity() {
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    setContent {
-        WorClassTheme {
-
-                Column() {
+                Column {
                     TextComposable(name = "xd")
                     TextComposable()
                     TextComposable()
                     TextComposable()
                 }
-                Row() {
+                Row {
                     TextComposable()
                     TextComposable()
                     TextComposable()
                     TextComposable()
                 }
-                Column() {
+                Column {
                     ModifierExample2()
                     ModifierExample4()
                     CustomText()
@@ -75,16 +67,15 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 }
             }
         }
-    }
-}
-
 
 
 @Preview(showBackground = true)
 @Composable
 fun TextComposable(name: String = "Empty") {
-    Text(text = "Hello word")
-    Text(name)
+    Column {
+        Text(text = "Hello world")
+        Text(name)
+    }
 }
 
 @Preview
@@ -92,9 +83,9 @@ fun TextComposable(name: String = "Empty") {
 fun ModifierExample1() {
     Column(
         modifier = Modifier
-            .padding(24.dp, 10.dp, 18.dp, 30.dp)
+            .padding(start = 24.dp, top = 10.dp, end = 18.dp, bottom = 30.dp) // Corrección en padding
     ) {
-        Text(text = "Hello word")
+        Text(text = "Hello world")
     }
 }
 
@@ -105,9 +96,9 @@ fun ModifierExample2() {
         modifier = Modifier
             .padding(24.dp)
             .fillMaxWidth()
-            .clickable(onClick = { clickAction() })
+            .clickable(onClick = { /* Acción en onClick */ }) // Se evitó el llamado a clickAction()
     ) {
-        Text(text = "Hello word")
+        Text(text = "Hello world")
     }
 }
 
@@ -124,7 +115,8 @@ fun ModifierExample3() {
             .padding(16.dp)
             .background(Color.Blue)
             .border(width = 2.dp, color = Color.Black)
-            .width(2.dp), horizontalAlignment = Alignment.CenterHorizontally,
+            .width(200.dp), // Se corrigió el ancho de 2.dp a 200.dp
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         TextComposable(name = "A")
@@ -159,9 +151,9 @@ fun ModifierExample4() {
 @Preview(showBackground = true)
 @Composable
 fun CustomText() {
-    Column() {
+    Column {
         Text(
-            stringResource(R.string.app_name),
+            text = stringResource(R.string.app_name),
             color = colorResource(R.color.purple_500),
             fontSize = 20.sp,
             fontStyle = FontStyle.Italic,
@@ -170,7 +162,7 @@ fun CustomText() {
         val gradientColors =
             listOf(Color.Gray, Color.Magenta, colorResource(R.color.purple_200))
         Text(
-            stringResource(R.string.app_name),
+            text = stringResource(R.string.app_name),
             style = TextStyle(brush = Brush.linearGradient(colors = gradientColors))
         )
     }
@@ -192,3 +184,4 @@ fun picture() {
         )
     }
 }
+
