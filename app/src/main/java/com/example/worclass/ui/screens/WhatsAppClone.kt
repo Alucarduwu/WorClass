@@ -102,7 +102,7 @@ fun FloatingActionButtons() {
             containerColor = Color(0xFF128C7E),
             contentColor = Color.White
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Camera")
+            Icon(Icons.Default.Add, contentDescription = "Cameraa")
         }
     }
 
