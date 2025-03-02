@@ -51,6 +51,10 @@ fun HomeScreen(navController: NavHostController) {
         {
             Text(text = "Main Screen:)")
         }
+        Button(onClick = {navController.navigate(route = "WhatsAppClone")})
+        {
+            Text(text = "Wsp Screen:)")
+        }
         Content2()
         Content()
 
