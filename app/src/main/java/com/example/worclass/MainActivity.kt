@@ -1,5 +1,6 @@
 package com.example.worclass
 
+import WhatsAppCloneApp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -69,6 +70,7 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("MainMenuScreen") { MainMenuScreen(navController) }
         composable("HomeScreen") { HomeScreen(navController) }
         composable("TestScreen") { TestScreen(navController) }
+        composable("WhatsAppClone") { WhatsAppCloneApp(navController) }
     }
 }
 

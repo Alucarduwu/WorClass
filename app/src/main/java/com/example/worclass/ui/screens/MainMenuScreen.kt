@@ -26,6 +26,10 @@ fun MainMenuScreen(navController: NavHostController) {
         {
             Text(text = "Test Screen:)")
         }
+        Button(onClick = {navController.navigate(route = "WhatsAppClone")})
+        {
+            Text(text = "Wsp Screen:)")
+        }
 
     }
 
