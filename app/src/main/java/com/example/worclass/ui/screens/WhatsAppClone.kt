@@ -102,7 +102,8 @@ fun FloatingActionButtons() {
             containerColor = Color(0xFF128C7E),
             contentColor = Color.White
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Cameraa")
+            //Por si quiero agg alguna acción al botonsito
+            Icon(Icons.Default.Add, contentDescription = "Camera")
         }
     }
 
@@ -121,7 +122,7 @@ fun WhatsAppTopBar() {
         },
         actions = {
             IconButton(onClick = {}) {
-               // Icon(painterResource(id = drawable.ca), contentDescription = "Camera", tint = Color.White)
+                //Icon(painterResource(id = drawable.cam), contentDescription = "Camera", tint = Color.White)
             }
 
 

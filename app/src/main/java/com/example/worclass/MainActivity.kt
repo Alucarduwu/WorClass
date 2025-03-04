@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.worclass.ui.screens.ComponentsScreen
 import com.example.worclass.ui.screens.CustomText
 import com.example.worclass.ui.screens.HomeScreen
 import com.example.worclass.ui.screens.MainMenuScreen
@@ -71,6 +72,7 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("HomeScreen") { HomeScreen(navController) }
         composable("TestScreen") { TestScreen(navController) }
         composable("WhatsAppClone") { WhatsAppCloneApp(navController) }
+        composable("ComponentsScreen") { ComponentsScreen(navController) }
     }
 }
 
