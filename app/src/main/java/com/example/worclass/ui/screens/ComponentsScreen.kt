@@ -7,13 +7,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
@@ -52,7 +58,6 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -63,211 +68,78 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.worclass.data.model.MenuModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
 
 @Composable
-fun ComponentsScreen(navController: NavHostController){
-    //Buttons() // Function to display different types of buttons
-    //FloatingButtons() // Function to display floating action buttons
-    //Progress() // Function to show progress indicators
-    //Chips() // Function to display chip components
-    //Sliders() // Function to display sliders
-    //Switches() // Function to display switches and checkboxes
-    //Badges()
-    //SnackBars()
-    //AlertDialogs()
-    var option by rememberSaveable{ mutableStateOf("")}
-    var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    var scope = rememberCoroutineScope()
+fun ComponentsScreen(navController: NavHostController) {
+    var menuOption = arrayOf(
+        MenuModel(1,"Buttons","Buttons", Icons.Filled.ShoppingCart),
+        MenuModel(2,"Floating buttons","FloatingButtons", Icons.Filled.ShoppingCart),
+        MenuModel(3,"Progress","Progress", Icons.Filled.Add),
+        MenuModel(4,"Chips","Chips", Icons.Filled.AddCircle),
+        MenuModel(5,"Sliders","Sliders", Icons.Filled.Clear),
+        MenuModel(6,"Switches","Switches", Icons.Filled.Person),
+        MenuModel(7,"Badges","Badges", Icons.Filled.Email),
+        MenuModel(8,"SnackBars","SnackBars", Icons.Filled.AddCircle),
+        MenuModel(9,"AlertDialogs","AlertDialogs", Icons.Filled.Warning),
+    );
+
+    var option by rememberSaveable { mutableStateOf("") };
+    var drawerState = rememberDrawerState(initialValue = DrawerValue.Closed);
+    var scope = rememberCoroutineScope();
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                Text("Menú", modifier = Modifier.padding(16.dp))
-                HorizontalDivider()
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("First menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Buttons"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
+                Text("Menú", modifier = Modifier.padding(16.dp));
+                HorizontalDivider();
+                LazyColumn {
+                    items(menuOption) { item ->
+                        NavigationDrawerItem(
+                            icon = { Icon(item.icon, contentDescription = "item") },
+                            label = { Text(item.title) },
+                            selected = false,
+                            onClick = {
+                                option = "Buttons";
+                                scope.launch { drawerState.close(); }
                             }
-                        }
+                        );
                     }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.CheckCircle, contentDescription = "item") },
-                    label = { Text("Second menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "FloatingButtons"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Tercer menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Progress"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Fourth menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Chips"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Five menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Sliders"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Sixth menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Switches"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Seventh menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "Badges"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Eight menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "SnackBars"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "item") },
-                    label = { Text("Nine menú item") },
-                    selected = false,
-                    onClick = {
-                        option = "AlertDialogs"
-                        scope.launch {
-                            drawerState.apply {
-                                close()
-                            }
-                        }
-                    }
-                )
+                }
             }
         }
     ) {
         Column {
-            when(option){
-                "Buttons"->{
-                    Buttons()
-                }
-                "FloatingButtons"->{
-                    FloatingButtons()
-                }
-                "Progress"->{
-                    Progress()
-                }
-                "Chips"->{
-                    Chips()
-                }
-                "Sliders"->{
-                    Sliders()
-                }
-                "Switches"->{
-                    Switches()
-                }
-                "Badges"->{
-                    Badges()
-                }
-                "SnackBars"->{
-                    SnackBars()
-                }
-                "AlertDialogs"->{
-                    AlertDialogs()
-                }
-
+            when (option) {
+                "Buttons" -> Buttons()
+                "FloatingButtons" -> FloatingButtons()
+                "Progress" -> Progress()
+                "Chips" -> Chips()
+                "Sliders" -> Sliders()
+                "Switches" -> Switches()
+                "Badges" -> Badges()
+                "SnackBars" -> SnackBars()
+                "AlertDialogs" -> AlertDialogs()
             }
         }
     }
 }
 
-
-
 @Preview(showBackground = true)
 @Composable
-fun Buttons(){
+fun Buttons() {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
-
     ) {
-        Button(onClick = {}){
-            Text("Filled")
-        }
-        FilledTonalButton(onClick = {}){
-            Text("Tonal")
-        }
-        OutlinedButton (onClick = {}){
-            Text("Outlined")
-        }
-        ElevatedButton(onClick = {}){
-            Text("Elevated")
-        }
-        TextButton(onClick = {}){
-            Text("Text")
-        }
+        Button(onClick = {}) { Text("Filled") }
+        FilledTonalButton(onClick = {}) { Text("Tonal") }
+        OutlinedButton(onClick = {}) { Text("Outlined") }
+        ElevatedButton(onClick = {}) { Text("Elevated") }
+        TextButton(onClick = {}) { Text("Text") }
     }
 }
 @Preview(showBackground = true)
