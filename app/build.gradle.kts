@@ -53,7 +53,11 @@ dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.android)
-    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.runtime.ktx) {
+
+    }
+    implementation(libs.androidx.material3.adaptive.android)
+    implementation(libs.androidx.material3.window.size)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

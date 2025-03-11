@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
+import androidx.compose.material3.ExposedDropdownMenuDefaults.textFieldColors
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -180,14 +181,16 @@ fun SearchBarOnly() {
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = Color.Gray) },
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(androidx.compose.foundation.shape.CircleShape)
+                .clip(CircleShape)
                 .background(Color(0xFF1E1E1E)),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color(0xFF1E1E1E),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+            colors = TextFieldDefaults.run {
+                textFieldColors(
+                        //containerColor = Color(0xFF1E1E1E),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
 
-            )
+                    )
+            }
         )
     }
 }

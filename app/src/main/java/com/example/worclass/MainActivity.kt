@@ -1,5 +1,4 @@
 package com.example.worclass
-
 import WhatsAppCloneApp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.worclass.ui.screens.ComponentsScreen
 import com.example.worclass.ui.screens.CustomText
 import com.example.worclass.ui.screens.HomeScreen
 import com.example.worclass.ui.screens.MainMenuScreen
@@ -22,6 +20,7 @@ import com.example.worclass.ui.screens.TestScreen
 import com.example.worclass.ui.screens.TextComposable
 import com.example.worclass.ui.screens.picture
 import com.example.worclass.ui.theme.WorClassTheme
+import com.example.workclass.ui.screens.ComponentsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
