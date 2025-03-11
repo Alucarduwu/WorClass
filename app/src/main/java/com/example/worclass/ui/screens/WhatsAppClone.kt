@@ -198,7 +198,7 @@ fun SearchBarOnly() {
 @Composable
 fun TabsRow() {
     Row(modifier = Modifier.fillMaxWidth().background(Color.Black).padding(8.dp), horizontalArrangement = Arrangement.SpaceAround) {
-        listOf("Todos", "No leídos", "Favoritos", "Grupos").forEach { tab ->
+        listOf("Todos", "No leídoss", "Favoritos", "Grupos").forEach { tab ->
             Text(
                 text = tab,
                 color = Color.White,
