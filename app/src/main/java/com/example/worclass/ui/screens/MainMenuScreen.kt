@@ -30,6 +30,10 @@ fun MainMenuScreen(navController: NavHostController) {
         {
             Text(text = "Wsp Screen:)")
         }
+        Button(onClick = {navController.navigate(route = "ComponentsScreen")})
+        {
+            Text(text = "Comps Screen:)")
+        }
 
     }
 
