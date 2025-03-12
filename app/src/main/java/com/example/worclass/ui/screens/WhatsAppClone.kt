@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
+import androidx.compose.material3.ExposedDropdownMenuDefaults.textFieldColors
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -102,7 +103,8 @@ fun FloatingActionButtons() {
             containerColor = Color(0xFF128C7E),
             contentColor = Color.White
         ) {
-            Icon(Icons.Default.Add, contentDescription = "Cameraa")
+            //Por si quiero agg alguna acción al botonsito
+            Icon(Icons.Default.Add, contentDescription = "Camera")
         }
     }
 
@@ -121,7 +123,7 @@ fun WhatsAppTopBar() {
         },
         actions = {
             IconButton(onClick = {}) {
-               // Icon(painterResource(id = drawable.ca), contentDescription = "Camera", tint = Color.White)
+                //Icon(painterResource(id = drawable.cam), contentDescription = "Camera", tint = Color.White)
             }
 
 
@@ -179,14 +181,16 @@ fun SearchBarOnly() {
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = Color.Gray) },
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(androidx.compose.foundation.shape.CircleShape)
+                .clip(CircleShape)
                 .background(Color(0xFF1E1E1E)),
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color(0xFF1E1E1E),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent
+            colors = TextFieldDefaults.run {
+                textFieldColors(
+                        //containerColor = Color(0xFF1E1E1E),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
 
-            )
+                    )
+            }
         )
     }
 }
@@ -194,7 +198,7 @@ fun SearchBarOnly() {
 @Composable
 fun TabsRow() {
     Row(modifier = Modifier.fillMaxWidth().background(Color.Black).padding(8.dp), horizontalArrangement = Arrangement.SpaceAround) {
-        listOf("Todos", "No leídos", "Favoritos", "Grupos").forEach { tab ->
+        listOf("Todos", "No leídoss", "Favoritos", "Grupos").forEach { tab ->
             Text(
                 text = tab,
                 color = Color.White,

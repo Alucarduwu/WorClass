@@ -1,5 +1,4 @@
 package com.example.worclass
-
 import WhatsAppCloneApp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -21,6 +20,7 @@ import com.example.worclass.ui.screens.TestScreen
 import com.example.worclass.ui.screens.TextComposable
 import com.example.worclass.ui.screens.picture
 import com.example.worclass.ui.theme.WorClassTheme
+import com.example.workclass.ui.screens.ComponentsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +71,7 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("HomeScreen") { HomeScreen(navController) }
         composable("TestScreen") { TestScreen(navController) }
         composable("WhatsAppClone") { WhatsAppCloneApp(navController) }
+        composable("ComponentsScreen") { ComponentsScreen(navController) }
     }
 }
 
