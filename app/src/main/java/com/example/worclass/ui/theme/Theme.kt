@@ -9,18 +9,24 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = BlueGray800,
+    onPrimary = Color.White, // Texto en elementos con color primario
     secondary = BlueGray50,
-    tertiary = Pink80
+    onSecondary = Color.White, // Texto en elementos con color secundario
+    tertiary = Pink80,
+    onTertiary = Color.White // Texto en elementos con color terciario
 )
+
 
 private val LightColorScheme = lightColorScheme(
     primary = BlueGray100,
     secondary = BlueGray800,
     tertiary = Pink40
+
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
