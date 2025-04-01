@@ -115,8 +115,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 import com.example.worclass.R
-import com.example.worclass.data.model.MenuModel
-import com.example.worclass.data.model.PostCardModel
+import com.example.worclass.data.model.model.MenuModel
+import com.example.worclass.data.model.model.PostCardModel
 import com.example.worclass.ui.components.PostCardComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
