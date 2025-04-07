@@ -68,7 +68,7 @@ fun PostCardCompactComponent(id:Int,title:String,text:String, image:Int){
                     .width(80.dp)
                     .height(100.dp),
                 painter = painterResource(image),
-                contentDescription = "Amongus",
+                contentDescription = "Amonus",
                 contentScale = ContentScale.Crop
             )
             Column() {
