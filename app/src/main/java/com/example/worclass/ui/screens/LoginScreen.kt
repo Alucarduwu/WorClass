@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -39,109 +40,121 @@ import coil.compose.AsyncImage
 import com.example.worclass.data.model.model.UserModel
 import com.example.worclass.data.model.viewmodel.UserViewModel
 
-
 @Composable
-fun LoginScreen(navController: NavController) {
-    Column(
+fun LoginScreen(navController: NavController){
+    Column (
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll((rememberScrollState())),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
-    ) {
-        LoginForm()
+
+    ){
+        LoginForm(navController)
     }
 }
 
-@Preview
 @Composable
-fun LoginForm(viewModel: UserViewModel= viewModel()) {
+fun LoginForm(
+    navController: NavController,
+    viewModel: UserViewModel = viewModel()){
     val context = LocalContext.current
     Card(
         colors = CardDefaults.cardColors(
-            contentColor = MaterialTheme.colorScheme.onSurface,
+            contentColor = Color.White,
             containerColor = MaterialTheme.colorScheme.surface
         ),
-        modifier = Modifier.padding(40.dp, 0.dp)
+        modifier = Modifier. padding(40.dp,0.dp)
+
     ) {
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column (
+            modifier = Modifier.padding(20.dp)
+        ){
             var user by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
+            var password by remember{ mutableStateOf("")}
 
             AsyncImage(
-                model = "",
-                contentDescription = "image",
+                model = "https://logosmarcas.net/wp-content/uploads/2020/12/GitHub-Simbolo.png",
+                contentDescription = "Git Hub Logo",
                 contentScale = ContentScale.Fit
+
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = user,
                 maxLines = 1,
                 onValueChange = { user = it },
-                label = { Text("User") },
+                label = { Text("User")},
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                     focusedBorderColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-                    focusedTextColor = MaterialTheme.colorScheme.onSurface
+                    unfocusedContainerColor = Color.Transparent,
+                    unfocusedTextColor = Color.White,
+                    focusedTextColor = Color.White
                 )
+
             )
+
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = password,
                 maxLines = 1,
                 onValueChange = { password = it },
-                label = { Text("Password") },
+                label = { Text("Password")},
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = MaterialTheme.colorScheme.primary,
                     focusedBorderColor = MaterialTheme.colorScheme.secondary,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
-                    focusedTextColor = MaterialTheme.colorScheme.onSurface
+                    unfocusedContainerColor = Color.Transparent,
+                    unfocusedTextColor = Color.White,
+                    focusedTextColor = Color.White
                 )
+
             )
             FilledTonalButton(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    contentColor = MaterialTheme.colorScheme.secondary
                 ),
-                modifier = Modifier.fillMaxWidth().padding(0.dp, 10.dp),
+                modifier = Modifier.fillMaxWidth().padding(0.dp,10.dp),
                 shape = CutCornerShape(4.dp),
-                onClick = { Tryloggin(user, password, context, viewModel) }
+                onClick = { TryLogin(user,password,context,viewModel, navController)}
             ) {
                 Text("LOG IN")
             }
-            OutlinedButton(
+            OutlinedButton (
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent,
                     contentColor = MaterialTheme.colorScheme.primary
                 ),
-                modifier = Modifier.fillMaxWidth().padding(0.dp, 10.dp),
+                modifier = Modifier.fillMaxWidth().padding(0.dp,10.dp),
                 shape = CutCornerShape(4.dp),
                 onClick = {}
             ) {
                 Text("CREATE ACCOUNT")
             }
+
         }
     }
 }
 
-fun Tryloggin(user: String, password: String, context: Context, viewModel: UserViewModel) {
-    if (user == "" || password == "") {
+
+fun TryLogin(user: String, password: String, context: Context, viewModel: UserViewModel, navController: NavController){
+    if(user == "" || password == ""){
         Toast.makeText(
             context,
-            "User or password cannot be empty",
+            "User or Password cannot be empty",
             Toast.LENGTH_SHORT
         ).show()
-    } else{
-        val user_model = UserModel(0,"",user,password)
-        viewModel.loginApi(user_model){
-                jsonResponse -> val loginStatus = jsonResponse?.get("login")?.asString
-            Log.d("debug","LOGIN_STATUS: $loginStatus")
+    } else {
+        val user_Model = UserModel(0,"", user, password)
+        viewModel.loginApi(user_Model){ jsonResponse ->
+            val loginStatus = jsonResponse?.get("login")?.asString
+            Log.d("debug", "LOGIN STATUS: $loginStatus")
+            if(loginStatus == "success"){
+                navController.navigate("accounts_screen")
+            }
         }
+
     }
 }
