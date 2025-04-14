@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "WorClass"
+rootProject.name = "Workclass"
 include(":app")
- 

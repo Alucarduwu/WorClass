@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 
+
+// la tarjeta con cuentag
 @Composable
 fun AccountCardComponent(
     id: Int,
@@ -31,55 +33,66 @@ fun AccountCardComponent(
     username: String,
     imageURL: String,
     onButtonClick: () -> Unit
-){
-    Card (
+) {
+
+    Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(3.dp)
-    ){
-        Row {
+    ) {
+
+        Row() {
+
             AsyncImage(
                 modifier = Modifier
                     .width(80.dp)
                     .height(80.dp)
                     .padding(10.dp),
                 model = imageURL,
-                error = painterResource(R.drawable.btn_plus),
+                error = painterResource(R.drawable.ic_menu_agenda),
                 contentDescription = "Account Logo",
                 contentScale = ContentScale.FillBounds
             )
+
+
             Column {
                 Text(
                     text = name,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(2.dp,8.dp,0.dp,0.dp)
+                    modifier = Modifier
+                        .padding(2.dp, 8.dp, 0.dp, 0.dp)
                 )
+
+
                 Text(
                     text = username,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(2.dp,8.dp,0.dp,0.dp)
+                    modifier = Modifier
+                        .padding(2.dp, 8.dp, 0.dp, 0.dp)
                 )
             }
-            Row {
-                Row (
+
+            // LOS 3 PUNTITOS
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                IconButton(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(80.dp),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    IconButton(
-                        modifier = Modifier
-                            .padding(0.dp,0.dp,10.dp,0.dp),
-                        onClick = { onButtonClick() }
-                    ) {
-                        Icon(
-                            Icons.Filled.MoreVert,
-                            contentDescription = "Icon"
-                        )
-                    }
+                        .padding(20.dp, 0.dp, 0.dp, 0.dp),
+                    onClick = { onButtonClick() }
+                ) {
+
+                    Icon(
+                        Icons.Filled.MoreVert,
+                        contentDescription = "Icon"
+                    )
                 }
             }
         }

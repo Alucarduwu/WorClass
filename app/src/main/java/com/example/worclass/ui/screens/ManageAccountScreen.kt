@@ -9,68 +9,76 @@ import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.worclass.data.model.model.AccountModel
-import com.example.worclass.data.model.viewmodel.AccountViewModel
-import com.example.worclass.ui.components.TopAppBarComponent
-
+import com.example.worclass.ui.components.TopBarComponent
 
 @Composable
-fun ManageAccountScreen(navController: NavController, viewModel: AccountViewModel = viewModel())
-{
+fun ManageAccountScreen(
+    navController: NavController,
+    id: Int?
+) {
     val account = remember { mutableStateOf(AccountModel()) }
-    val context = LocalContext.current
-    Column(modifier = Modifier
-        .background(MaterialTheme.colorScheme.background)
-        .padding(10.dp)
-        .fillMaxSize()
+    var buttonText by remember { mutableStateOf("Save account") }
+
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .padding(10.dp)
+            .fillMaxSize()
     ) {
+        TopBarComponent("Add account", navController, "manage_account_screen")
 
-
-        TopAppBarComponent("Add account", navController, "manage_account_screen")
-        OutlinedTextField(modifier = Modifier
-            .fillMaxWidth(),
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = account.value.name,
             maxLines = 1,
-            label = {"Account name" },
-            onValueChange = {account.value = account.value.copy(name = it)}
+            label = { Text("Account name") },
+            onValueChange = { account.value = account.value.copy(name = it) }
         )
-        OutlinedTextField(modifier = Modifier
-            .fillMaxWidth(),
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = account.value.username,
             maxLines = 1,
-            label = {"Account username" },
-            onValueChange = {account.value = account.value.copy(username = it)}
+            label = { Text("Account username") },
+            onValueChange = { account.value = account.value.copy(username = it) }
         )
-        OutlinedTextField(modifier = Modifier
-            .fillMaxWidth(),
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = account.value.password,
             maxLines = 1,
-            label = {"Account password" },
-            onValueChange = {account.value = account.value.copy(password = it)}
+            label = { Text("Account password") },
+            onValueChange = { account.value = account.value.copy(password = it) }
         )
-        OutlinedTextField(modifier = Modifier
-            .fillMaxWidth(),
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = account.value.description,
             maxLines = 1,
-            label = {"Account description" },
-            onValueChange = {account.value = account.value.copy(description = it)}
+            label = { Text("Account description") },
+            onValueChange = { account.value = account.value.copy(description = it) }
         )
-        FilledTonalButton(modifier = Modifier
-            .fillMaxWidth()
-            .padding(0.dp, 10.dp),
-            onClick =  {
-                //..tarea on click, delete
+
+        FilledTonalButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 10.dp),
+            onClick = {
+                if (
+                    account.value.name.isBlank() ||
+                    account.value.username.isBlank() ||
+                    account.value.password.isBlank() ||
+                    account.value.description.isBlank()
+                ) {
+                    buttonText = "Faltan campos"
+                } else {
+                    buttonText = "Agregado con éxito"
+                }
             }
-        ){
-            Text("Save account")
+        ) {
+            Text(buttonText)
         }
     }
 }

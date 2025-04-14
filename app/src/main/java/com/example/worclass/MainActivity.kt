@@ -1,58 +1,45 @@
 package com.example.worclass
+
 import WhatsAppCloneApp
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.worclass.data.model.database.AppDatabase
+import com.example.worclass.data.model.database.DatabaseProvider
 import com.example.worclass.ui.screens.AccountScreen
-import com.example.worclass.ui.screens.CustomText
+import com.example.worclass.ui.screens.FavoriteAccountScreen
 import com.example.worclass.ui.screens.HomeScreen
 import com.example.worclass.ui.screens.LoginScreen
 import com.example.worclass.ui.screens.MainMenuScreen
 import com.example.worclass.ui.screens.ManageAccountScreen
-import com.example.worclass.ui.screens.ModifierExample2
-import com.example.worclass.ui.screens.ModifierExample4
 import com.example.worclass.ui.screens.TestScreen
-import com.example.worclass.ui.screens.TextComposable
-import com.example.worclass.ui.screens.picture
 import com.example.worclass.ui.theme.WorClassTheme
 import com.example.workclass.ui.screens.ComponentsScreen
 
 class MainActivity : ComponentActivity() {
+    lateinit var database: AppDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        try {
+            database = DatabaseProvider.getDatabase(this)
+            Log.d("debug-db", "Database loaded successfully")
+        } catch (exception: Exception) {
+            Log.d("debug-db", "ERROR: $exception")
+        }
+
         enableEdgeToEdge()
         setContent {
             WorClassTheme {
                 ComposeMultiScreenApp()
-                /*WorClassTheme {
-
-                Column() {
-                    TextComposable(name = "xd")
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                }
-                Row() {
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                    TextComposable()
-                }
-                Column() {
-                    ModifierExample2()
-                    ModifierExample4()
-                    CustomText()
-                    picture()
-                }
-            }}*/
             }
         }
     }
@@ -76,8 +63,11 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("WhatsAppClone") { WhatsAppCloneApp(navController) }
         composable("ComponentsScreen") { ComponentsScreen(navController) }
         composable("LoginScreen") { LoginScreen(navController) }
-        composable("AccountsScreen") { AccountScreen(navController) }
-        composable("ManageAccountScreen") { ManageAccountScreen(navController) }
+        composable("accounts_screen") { AccountScreen(navController) } // <- Corregido aquí
+        composable("favorite_accounts_screen") { FavoriteAccountScreen(navController) }
+        composable("manage_account_screen?id={id}") { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            ManageAccountScreen(navController = navController, id = id)
+        }
     }
 }
-
