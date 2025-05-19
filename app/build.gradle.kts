@@ -101,4 +101,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+// WorkManager
+// REVISA QUE NO LOS TENGAS REPETIDOS, USA CTRL + F
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation (libs.androidx.work.runtime)
+
+
+
+
+    val cameraxVersion = "1.3.1"
+    implementation(libs.androidx.camera.core) // Lógica base
+    implementation(libs.androidx.camera.camera2)// Conexión con la API Camera2
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view) // Necesario para la prewiew
+    implementation(libs.androidx.navigation.compose.v277)
+    implementation (libs.accompanist.permissions)
+    implementation(libs.androidx.camera.video)
+    implementation (libs.coil.compose.v222)
 }

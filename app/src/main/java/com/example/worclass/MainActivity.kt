@@ -16,12 +16,14 @@ import com.example.worclass.data.model.database.DatabaseProvider
 import com.example.worclass.ui.screens.AccountScreen
 import com.example.worclass.ui.screens.FavoriteAccountScreen
 import com.example.worclass.ui.screens.HomeScreen
-import com.example.worclass.ui.screens.LoginScreen
 import com.example.worclass.ui.screens.MainMenuScreen
 import com.example.worclass.ui.screens.ManageAccountScreen
+import com.example.worclass.ui.screens.NotificationScreen
 import com.example.worclass.ui.screens.TestScreen
 import com.example.worclass.ui.theme.WorClassTheme
 import com.example.workclass.ui.screens.ComponentsScreen
+import com.example.workclass.ui.screens.LoginScreen
+import com.example.workclass.ui.screens.ReporteFotoApp
 
 class MainActivity : ComponentActivity() {
     lateinit var database: AppDatabase
@@ -63,6 +65,8 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("WhatsAppClone") { WhatsAppCloneApp(navController) }
         composable("ComponentsScreen") { ComponentsScreen(navController) }
         composable("LoginScreen") { LoginScreen(navController) }
+        composable( "NotificationScreen" ) { NotificationScreen(navController) }
+        composable("camara") { ReporteFotoApp(navController) }
         composable("accounts_screen") { AccountScreen(navController) } // <- Corregido aquí
         composable("favorite_accounts_screen") { FavoriteAccountScreen(navController) }
         composable("manage_account_screen?id={id}") { backStackEntry ->
@@ -71,3 +75,4 @@ fun SetUpNavGraph(navController: NavHostController) {
         }
     }
 }
+

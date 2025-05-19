@@ -38,6 +38,14 @@ fun MainMenuScreen(navController: NavHostController) {
         {
             Text(text = "Log Screen:)")
         }
+        Button(onClick = {navController.navigate( route = "NotificationScreen")})
+        {
+            Text(text = "NotificationScreen")
+        }
+        Button(onClick = {navController.navigate("camara")}
+        ) {
+            Text("GO TO API CAMERA")
+        }
 
     }
 
