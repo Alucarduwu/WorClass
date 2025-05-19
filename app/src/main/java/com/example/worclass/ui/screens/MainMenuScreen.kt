@@ -46,6 +46,10 @@ fun MainMenuScreen(navController: NavHostController) {
         ) {
             Text("GO TO API CAMERA")
         }
+        Button(onClick = {navController.navigate("biometric_screen")}
+        ) {
+            Text("Biometrics screen")
+        }
 
     }
 

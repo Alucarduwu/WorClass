@@ -3,10 +3,12 @@ package com.example.worclass
 import WhatsAppCloneApp
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.worclass.data.model.database.AppDatabase
 import com.example.worclass.data.model.database.DatabaseProvider
 import com.example.worclass.ui.screens.AccountScreen
+import com.example.worclass.ui.screens.BiometricScreen
 import com.example.worclass.ui.screens.FavoriteAccountScreen
 import com.example.worclass.ui.screens.HomeScreen
 import com.example.worclass.ui.screens.MainMenuScreen
@@ -24,8 +27,9 @@ import com.example.worclass.ui.theme.WorClassTheme
 import com.example.workclass.ui.screens.ComponentsScreen
 import com.example.workclass.ui.screens.LoginScreen
 import com.example.workclass.ui.screens.ReporteFotoApp
+import androidx.fragment.app.FragmentActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
     lateinit var database: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +76,13 @@ fun SetUpNavGraph(navController: NavHostController) {
         composable("manage_account_screen?id={id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
             ManageAccountScreen(navController = navController, id = id)
+        }
+        composable("biometric_screen"){
+            val context = LocalContext.current
+            BiometricScreen(navController, onAuthSuccess = {
+                Toast.makeText(context,"Auth exitosa", Toast.LENGTH_SHORT).show()
+
+            })
         }
     }
 }
