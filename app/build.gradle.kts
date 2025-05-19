@@ -91,6 +91,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
+    implementation (libs.androidx.biometric)
+
     // Coil
     implementation(libs.coil.compose)
 
